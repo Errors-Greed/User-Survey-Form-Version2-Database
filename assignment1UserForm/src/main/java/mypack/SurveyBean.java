@@ -61,6 +61,8 @@ public class SurveyBean implements Serializable {
     public String getComments() { return comments; }
     public void setComments(String comments) { this.comments = comments; }
 
+
+    //Everything under is still in development. I am not doing something correct and I am trying to figure it out. 
     public Connection getConnection(){
         Connection conn=null;
         
@@ -68,9 +70,10 @@ public class SurveyBean implements Serializable {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             conn= DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/yourDatabase",
-            "root",
-            "");
+            "jdbc:mysql://localhost:3307/surveydb",
+            "TheOne",
+            "5071");
+            //MAKE SURE TO CHANGE THESE IF YOU ARE USING DIFFERENT SERVER
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -130,12 +133,76 @@ public class SurveyBean implements Serializable {
     
     public boolean updateSurvey(){
         //imma do tis later. 
-        return false;
+        
+        String sql="UPDATE survey_data SET "+
+                "name=?,"+
+                "phone=?,"+
+                "gender=?,"+
+                "qualification=?,"+
+                "employment=?,"+
+                "skills=?,"+
+                "proficiency=?,"+
+                "comments=?,"+
+                "resume=? "+
+                "WHERE email=?";
+        
+        try(Connection conn=getConnection();
+                PreparedStatement ps=conn.prepareStatement(sql)){
+            
+            ps.setString(1,name );
+            ps.setString(2,phone);
+            ps.setString(3, gender);
+            ps.setString(4, qualification);
+            ps.setString(5, employment);
+            ps.setString(6, String.join(", ", skills));
+            ps.setInt(7, proficiency);
+            ps.setString(8, comments);
+            ps.setString(9, resume);
+            ps.setString(10, email);
+            
+            return ps.executeUpdate()>0;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
     }
     
     //then is retrieve Survey that needs to be done. 
     //retrieveSurvey(String email)
-    
+    public boolean retrieveSurvey(String email){
+        String sql="SELECT * FROM survey_data WHERE email=?";
+        
+        try(Connection conn= getConnection();
+                PreparedStatement ps=conn.prepareStatement(sql)){
+            ps.setString(1, email);
+            
+            ResultSet rs=ps.executeQuery();
+            
+            if(rs.next()){
+                name=rs.getString("name");
+                this.email=rs.getString("email");
+                phone = rs.getString("phone");
+                gender = rs.getString("gender");
+                qualification = rs.getString("qualification");
+                employment = rs.getString("employment");
+                
+                String ss=rs.getString("skills");
+                if(ss !=null && !ss.isEmpty()){
+                    skills=ss.split(",\\s*");
+                }
+                
+                proficiency=rs.getInt("proficiency");
+                comments=rs.getString("comments");
+                resume=rs.getString("resume");
+                
+                return true;
+            }
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
     
     
 }

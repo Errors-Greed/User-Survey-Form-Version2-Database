@@ -118,7 +118,11 @@ public class SurveyBean implements Serializable {
             ps.setString(4, gender);
             ps.setString(5, qualification);
             ps.setString(6, employment);
-            ps.setString(7, String.join(", ", skills));
+            if(skills !=null){
+                ps.setString(7, String.join(", ", skills));
+            }else{
+                ps.setString(7,"");
+            }
             ps.setInt(8, proficiency);
             ps.setString(9, comments);
             ps.setString(10, resume);
@@ -154,7 +158,11 @@ public class SurveyBean implements Serializable {
             ps.setString(3, gender);
             ps.setString(4, qualification);
             ps.setString(5, employment);
-            ps.setString(6, String.join(", ", skills));
+            if(skills !=null){
+                ps.setString(6, String.join(", ", skills));
+            }else{
+                ps.setString(6,"");
+            }
             ps.setInt(7, proficiency);
             ps.setString(8, comments);
             ps.setString(9, resume);

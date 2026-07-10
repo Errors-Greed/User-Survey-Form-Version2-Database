@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>User Survey Form</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>User Survey Form</h1>
+        
+        <form action="SurveyServlet" method="POST">
+            
+            <fieldset>
+                <legend>Personal Information</legend>
+                
+                <label>Name: </label>
+                <input name="name" type="text" id="name" required>
+                <br>
+                
+                <label>Email: </label>
+                <input name="email" type="email" id="email" required placeholder="student@example.com">
+                <br>
+                
+                <label>Phone: </label>
+                <input name="phone" type="tel" id="phone" required placeholder ="###-###-####">
+                <br>
+                
+                <label>Age:</label>
+                <input name="age" type="number" id="age" min="1"
+                                                         max="120"
+                                                         value="0">
+                <br>
+                
+                <label>Gender: </label>
+                
+                <input type="radio" id="male" name="gender" value="Male" required>
+                <label for="male">Male</label>
+                
+                <input type="radio" id="female" name="gender" value="Female">
+                <label for="female">Female</label>
+                
+                <input type="radio" id="other" name="gender" value="Other">
+                <label for="other">Other</label>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Education & Employment</legend>
+                
+                <label>Highest Qualification: </label>
+                <select id="qualification" name="qualification" required>
+                    <option value="High School" selected>High School</option>
+                    <option value="Bachelor's">Bachelor's</option>
+                    <option value="Master's">Master's</option>
+                    <option value="PhD">PhD</option>
+                </select>
+                <br>
+                
+                <!--//ERROR WITH EMPLOYMENT-->
+                
+                <label>Employment Status: </label><br>
+                <input type="radio" id="student" name="employment" value="Student" required>
+                <label for="student">Student</label>
+                <input type="radio" id="employed" name="employment" value="Employed">
+                <label for="employed">Employed</label>
+                <input type="radio" id="unemployed" name="employment" value="Unemployed">
+                <label for="unemployed">Unemployed</label>
+            </fieldset>
+            
+                <!--ERROR WITH EMPLOYMENT-->
+            
+            <fieldset>
+                <legend>Technical Skills</legend>
+                
+                <label>Skills:</label>
+                <input type="checkbox" id="java" name="skills" value="Java">
+                <label for="java">Java</label>
+                
+                <input type="checkbox" id="python" name="skills" value="Python">
+                <label for="python">Python</label>
+                
+                <input type="checkbox" id="htmlcss" name="skills" value="HTML/CSS">
+                <label for="htmlcss">HTML/CSS</label>
+                
+                <input type="checkbox" id="javascript" name="skills" value="JavaScript">
+                <label for="javascript">JavaScript</label>
+                <br>
+                
+                <label for="proficiency">Rate your coding proficiency:</label><br>
+                <input type="range" id="proficiency" name="proficiency" min="1" max="10" value="5">
+            </fieldset>
+            
+            
+            <fieldset>
+                <legend>Upload Documents</legend>
+                <label>Upload Resume:</label><br>
+                <input type="file" id="resume" name="resume">
+            </fieldset>
+            
+            <fieldset>
+                <legend>Feedback</legend>
+                <label for="comments">Any Comments:</label><br>
+                <textarea id="comments" name="comments" rows="5" placeholder="Enter feedback"></textarea>
+            </fieldset>
+            
+            <button type="submit">Submit Survey</button>
+            
+        </form>
+    </body>
+</html>

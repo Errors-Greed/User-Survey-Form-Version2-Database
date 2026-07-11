@@ -1,0 +1,9 @@
+SHOW DATABASES;
+
+USE surveydb;
+SHOW TABLES;
+
+SELECT * FROM survey_data;
+
+DROP DATABASE surveydb;
+CREATE DATABASE surveydb;
